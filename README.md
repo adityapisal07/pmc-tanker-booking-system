@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 🚰 PMC Tanker Booking System
 
 A full-stack web application for booking water tankers online, developed using React (frontend) and Spring Boot + MySQL (backend).
@@ -55,3 +56,7 @@ Add screenshots of your homepage, booking form, etc.
 
 Aditya Pisal
 📧 adityapisal2004@gmail.com
+=======
+# pmc-tanker-booking-system
+A Tanker Booking System which helps user to book a water tankers and order them via a website .
+>>>>>>> fbf7d95 (Initial commit)
