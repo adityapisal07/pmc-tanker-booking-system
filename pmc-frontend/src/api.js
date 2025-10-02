@@ -7,12 +7,13 @@ const api = axios.create({
 // Signup API call
 export const signupUser = async (userData) => {
   try {
-    const response = await api.post("/signup", userData);
+    const response = await api.post("/api/auth/signup", userData); // FIXED
     return response.data;
   } catch (error) {
     console.error("Signup failed:", error);
     throw error;
   }
 };
+
 
 export default api;

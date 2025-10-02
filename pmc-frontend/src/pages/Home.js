@@ -19,7 +19,7 @@ const Home = ({ user }) => {
 
       {/* Main Sections */}
       <main className="home-main">
-        <h1 className="home-title">Welcome to Tanker Booking System</h1>
+        <h1 className="home-title">What would you like to do today?</h1>
         <div className="sections-container">
           <div className="section-card booking" onClick={() => navigate("/booking")}>
             <FaBook className="section-icon" />
