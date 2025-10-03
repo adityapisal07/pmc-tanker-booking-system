@@ -48,19 +48,32 @@ const Booking = () => {
         <h2>Book Your Water Tanker</h2>
         <form onSubmit={handleBooking} className="booking-form">
           <div className="input-group">
-            
-            <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            {/* <label htmlFor="name">Full Name</label> */}
+            <input 
+              id="name" 
+              type="text" 
+              placeholder="Enter your full name"
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+            />
           </div>
 
           <div className="input-group">
-            
-            <input id="phone" type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            {/* <label htmlFor="phone">Phone Number</label> */}
+            <input 
+              id="phone" 
+              type="tel" 
+              placeholder="Enter your phone number"
+              value={phone} 
+              onChange={(e) => setPhone(e.target.value)}
+              maxLength="10"
+            />
           </div>
 
           <div className="input-group">
-            
+            {/* <label htmlFor="area">Area</label> */}
             <select id="area" value={area} onChange={(e) => setArea(e.target.value)}>
-              
+              <option value="">Select Area</option>
               {puneAreas.map((a) => (
                 <option key={a} value={a}>{a}</option>
               ))}
@@ -68,14 +81,25 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            
-            <input id="address" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+            {/* <label htmlFor="address">Complete Address</label> */}
+            <input 
+              id="address" 
+              type="text" 
+              placeholder="Enter your complete address"
+              value={address} 
+              onChange={(e) => setAddress(e.target.value)} 
+            />
           </div>
 
           <div className="input-group">
-            
-            <select id="tankerType" value={tankerType} onChange={(e) => setTankerType(e.target.value)}>
-              
+            {/* <label htmlFor="tankerType">Tanker Type</label> */}
+            <select 
+              id="tankerType" 
+              value={tankerType} 
+              onChange={(e) => setTankerType(e.target.value)}
+              disabled={!area}
+            >
+              <option value="">Select Tanker Type</option>
               {availableTankers.map((t) => (
                 <option key={t} value={t}>{t}</option>
               ))}
@@ -83,9 +107,9 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            
+            {/* <label htmlFor="tankerSize">Tanker Size</label> */}
             <select id="tankerSize" value={tankerSize} onChange={(e) => setTankerSize(e.target.value)}>
-            
+              <option value="">Select Tanker Size</option>
               {tankerSizes.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
