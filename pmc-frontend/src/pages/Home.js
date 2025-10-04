@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBook, FaMoneyCheckAlt, FaHistory, FaQuestionCircle, FaUserCircle } from "react-icons/fa";
 import "./Home.css";
 
-const Home = ({ user }) => {
+const Home = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  // Load user from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <div className="home-wrapper">
@@ -12,14 +21,21 @@ const Home = ({ user }) => {
       <header className="home-header">
         <div className="logo">PMC Tanker Booking</div>
         <div className="header-right">
-          <span className="welcome-text">Welcome, {user?.name || "User"}</span>
-          <FaUserCircle className="profile-icon" onClick={() => navigate("/profile")} />
+          <span className="welcome-text">
+            Profile
+          </span>
+          <FaUserCircle
+            className="profile-icon"
+            onClick={() => navigate("/profile")}
+          />
         </div>
       </header>
 
       {/* Main Sections */}
       <main className="home-main">
-        <h1 className="home-title">What would you like to do today?</h1>
+        <h1 className="home-title">
+          Welcome to PMC Tanker Booking Platform
+        </h1>
         <div className="sections-container">
           <div className="section-card booking" onClick={() => navigate("/booking")}>
             <FaBook className="section-icon" />
