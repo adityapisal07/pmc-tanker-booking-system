@@ -144,7 +144,7 @@
 .input-group label {
   font-size: 14px;
   font-weight: 600;
-  color: #4a4a4a;
+  color: #000000;
   display: block;
   transition: color 0.3s ease;
   line-height: 1.4;
@@ -174,14 +174,14 @@
   font-size: 15px;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
-  background: #ffffff !important;
-  color: #000000 !important;
+  background: #ffffff ;
+  
   font-family: inherit;
   transition: all 0.3s ease;
   outline: none;
   font-weight: 500;
   line-height: 1.5;
-  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-fill-color: #000000 ;
 }
 
 .input-group input:focus,
@@ -189,9 +189,9 @@
   border-color: #667eea;
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
   transform: translateY(-2px);
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  background: #ffffff ;
+  color: #000000;
+  -webkit-text-fill-color: #000000 ;
 }
 
 .input-group input:hover,
@@ -202,8 +202,8 @@
 /* Ensure text is visible in all states */
 .input-group input:not(:placeholder-shown),
 .input-group select:not(:placeholder-shown) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: #000000;
+  -webkit-text-fill-color: #000000 ;
 }
 
 .input-group select {
@@ -213,13 +213,13 @@
   background-repeat: no-repeat;
   background-position: right 16px center;
   padding-right: 42px;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: #000000 ;
+  -webkit-text-fill-color: #000000 ;
 }
 
 .input-group select option {
-  color: #000000 !important;
-  background: #ffffff !important;
+  color: #000000 ;
+  background: #ffffff ;
 }
 
 .input-group select:disabled {
@@ -229,26 +229,9 @@
 }
 
 /* Placeholder Styles */
-.input-group input::placeholder {
-  color: #999 !important;
-  opacity: 1;
-  -webkit-text-fill-color: #999 !important;
-}
-
-.input-group input::-webkit-input-placeholder {
-  color: #999 !important;
-  opacity: 1;
-  -webkit-text-fill-color: #999 !important;
-}
-
-.input-group input::-moz-placeholder {
-  color: #999 !important;
-  opacity: 1;
-}
-
-.input-group input:-ms-input-placeholder {
-  color: #999 !important;
-  opacity: 1;
+.input-group input{
+  color : #0000 !important;
+  
 }
 
 /* Submit Button */

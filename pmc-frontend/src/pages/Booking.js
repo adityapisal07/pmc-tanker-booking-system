@@ -14,13 +14,13 @@ const Booking = () => {
   const [availableTankers, setAvailableTankers] = useState([]);
   const [message, setMessage] = useState("");
 
-  const puneAreas = ["Hadapsar", "Wagholi", "Viman Nagar", "Kharadi", "Magarpatta"];
+  const puneAreas = ["Hadapsar", "Wagholi", "VimanNagar", "Kharadi", "Magarpatta"];
   const tankersByArea = {
-    Hadapsar: ["AquaPure", "BlueWater"],
-    Wagholi: ["HydroMax", "PureFlow"],
-    "Viman Nagar": ["WaterKing", "HydroFresh"],
-    Kharadi: ["BlueWave", "ClearWater"],
-    Magarpatta: ["AquaSafe", "FlowPure"]
+    Hadapsar: ["GuruKrupa Water Suppliers", "Om Sai Water Suppliers"],
+    Wagholi: ["Nisarg Water Suppliers", "Aditya Water Suppliers"],
+    VimanNagar: ["Utkarsha Water Suppliers", "G.S Water Suppliers"],
+    Kharadi: ["Shree Water Suppliers", "H.S Water Suppliers"],
+    Magarpatta: ["Sainath Water Suppliers", "Mahakal Watrer Suppliers"]
   };
   const tankerSizes = ["1000L - Small", "3000L - Medium", "5000L - Large"];
 
@@ -30,17 +30,40 @@ const Booking = () => {
     setTankerType("");
   }, [area]);
 
-  const handleBooking = (e) => {
-    e.preventDefault();
-    if (!name || !phone || !area || !address || !tankerType || !tankerSize) {
-      setMessage("Please fill all fields!");
-      return;
+  const handleBooking = async (e) => {
+  e.preventDefault();
+
+  if (!name || !phone || !area || !address || !tankerType || !tankerSize) {
+    setMessage("Please fill all fields!");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        area,
+        address,
+        tankerType,
+        tankerSize,
+      }),
+    });
+
+    if (response.ok) {
+      setMessage(`Booking confirmed for ${tankerType} (${tankerSize}) in ${area}.`);
+      setTimeout(() => navigate("/payment"), 1500);
+    } else {
+      setMessage("Failed to confirm booking. Please try again.");
     }
-    setMessage(`Booking confirmed for ${tankerType} (${tankerSize}) in ${area}.`);
-    setTimeout(() => {
-      navigate("/payment");
-    }, 1500);
-  };
+  } catch (error) {
+    console.error("Error:", error);
+    setMessage("Server error. Please try again later.");
+  }
+};
+
 
   return (
     <div className="booking-page">
