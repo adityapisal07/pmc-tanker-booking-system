@@ -1,0 +1,29 @@
+services:
+  # Backend Service
+  - type: web
+    name: pmc-backend
+    env: java
+    region: oregon
+    plan: free
+    buildCommand: "./mvnw clean install -DskipTests"
+    startCommand: "java -jar target/*.jar"
+    envVars:
+      - key: JAVA_VERSION
+        value: "17"
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: PORT
+        value: 8080
+    
+  # Frontend Service (if deploying separately)
+  - type: web
+    name: pmc-frontend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: "cd pmc-frontend && npm install && npm run build"
+    staticPublishPath: pmc-frontend/build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
