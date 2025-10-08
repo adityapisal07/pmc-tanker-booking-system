@@ -15,7 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "react-scripts": "5.0.1"
+    "heroku-postbuild": "npm install react-scripts"
+
   },
   "eslintConfig": {
     "extends": [
