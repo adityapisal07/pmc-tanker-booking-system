@@ -1,0 +1,7 @@
+node_modules
+pmc-frontend
+target
+.git
+.gitignore
+*.md
+.env
