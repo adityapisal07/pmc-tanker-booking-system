@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base URL of your backend (Spring Boot deployed on Render)
-const BASE_URL = "https://pmc-tanker-booking-system-3.onrender.com"; // ← change this
+const BASE_URL = "http://localhost:8080"; // ← change this
 
 // User login
 export const loginUser = async (userData) => {

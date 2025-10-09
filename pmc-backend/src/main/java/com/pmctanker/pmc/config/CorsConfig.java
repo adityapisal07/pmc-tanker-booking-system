@@ -14,43 +14,33 @@ public class CorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        
-        // IMPORTANT: Replace with your actual Vercel URL
+
+        // ✅ Add your actual frontend domain
         config.setAllowedOrigins(Arrays.asList(
-       "https://pmc-tanker-bookingapplication8.vercel.app",          
-            "http://localhost:3000"                    
-                                  
+                "https://pmcapp989.vercel.app",  // your deployed frontend
+                "http://localhost:3000"          // local React testing
         ));
-        
-        // Allow all HTTP methods
+
         config.setAllowedMethods(Arrays.asList(
-            "GET", 
-            "POST", 
-            "PUT", 
-            "DELETE", 
-            "OPTIONS", 
-            "PATCH"
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS",
+                "PATCH"
         ));
-        
-        // Allow all headers
+
         config.setAllowedHeaders(Arrays.asList("*"));
-        
-        // Allow credentials (cookies, authorization headers)
         config.setAllowCredentials(true);
-        
-        // Cache preflight response for 1 hour
-        config.setMaxAge(3600L);
-        
-        // Expose headers for client
         config.setExposedHeaders(Arrays.asList(
-            "Authorization",
-            "Content-Type",
-            "X-Total-Count"
+                "Authorization",
+                "Content-Type",
+                "X-Total-Count"
         ));
-        
+        config.setMaxAge(3600L);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-        
         return new CorsFilter(source);
     }
 }
