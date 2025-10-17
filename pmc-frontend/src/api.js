@@ -1,52 +1,27 @@
 import axios from "axios";
 
-// Base URL of your backend (Spring Boot deployed on Render)
-const BASE_URL = "https://pmc-tanker-booking-system-3.onrender.com"; // ← change this
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
+});
 
-// User login
-export const loginUser = async (userData) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/api/auth/login`, userData);
-    return response.data;
-  } catch (error) {
-    console.error("Login error:", error);
-    throw error;
-  }
-};
-
-// User signup
 export const signupUser = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/auth/signup`, userData);
+    const response = await api.post("/api/auth/signup", userData);
     return response.data;
   } catch (error) {
-    console.error("Signup error:", error);
+    console.error("Signup failed:", error);
     throw error;
   }
 };
 
-// Get all bookings
-export const Bookings = async () => {
+export const loginUser = async (userData) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/bookings`);
+    const response = await api.post("/api/auth/login", userData);
     return response.data;
   } catch (error) {
-    console.error("Fetch bookings error:", error);
+    console.error("Login failed:", error);
     throw error;
   }
 };
 
-// Create a new booking
-export const Booking = async (bookingData) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/api/bookings`, bookingData);
-    return response.data;
-  } catch (error) {
-    console.error("Booking creation error:", error);
-    throw error;
-  }
-};
-
-export default axios.create({
-  baseURL: BASE_URL,
-});
+export default api;
