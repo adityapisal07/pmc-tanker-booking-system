@@ -12,13 +12,31 @@ const Help = () => {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
 
+  // Get API URL from environment variable
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   const toggleAccordion = (index) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
-  const faqs = [ { question: "How do I book a water tanker?", answer: "Navigate to the Booking page from the home screen, select your area, choose the tanker type and size, fill in your details, and confirm your booking." }, { question: "What payment methods are accepted?", answer: "We accept Credit/Debit Cards, UPI (GPay, PhonePe, Paytm), and Digital Wallets (Paytm Wallet, PhonePe Wallet, Amazon Pay)." }, { question: "How long does delivery take?", answer: "Typically, water tankers arrive within 2-4 hours of booking. During peak hours, it may take up to 6 hours. You'll receive updates via SMS and in-app notifications." }, { question: "Can I cancel my booking?", answer: "Yes, you can cancel your booking up to 1 hour before the scheduled delivery time. Go to History page, select your booking, and click Cancel." }, { question: "What are the tanker sizes available?", answer: "We offer three sizes: Small (1000L), Medium (3000L), and Large (5000L). Choose based on your water requirements." }, { question: "How do I track my order?", answer: "After booking confirmation, you'll receive a tracking link via SMS. You can also check the status in the History section of the app." }, { question: "What if the water quality is poor?", answer: "All our water is tested and certified. If you face any quality issues, contact our support immediately at support@pmctanker.com or call our helpline." }, { question: "Are there any additional charges?", answer: "The price displayed during booking is final. There are no hidden charges. However, cancellation after the tanker has been dispatched may incur a small fee." } ];
- const contactInfo = [ { icon: "📞", title: "Customer Support", detail: "+91 7028698932", subtext: "Available 24/7" }, { icon: "📧", title: "Email Support", detail: "adityapisal1508.com", subtext: "Response within 24 hours" }, { icon: "💬", title: "WhatsApp", detail: "+91 7028698932", subtext: "Quick assistance" }, { icon: "📍", title: "Office Address", detail: "PMC Office, Pune - 411001", subtext: "Mon-Sat: 9 AM - 6 PM" } ];
+  const faqs = [ 
+    { question: "How do I book a water tanker?", answer: "Navigate to the Booking page from the home screen, select your area, choose the tanker type and size, fill in your details, and confirm your booking." }, 
+    { question: "What payment methods are accepted?", answer: "We accept Credit/Debit Cards, UPI (GPay, PhonePe, Paytm), and Digital Wallets (Paytm Wallet, PhonePe Wallet, Amazon Pay)." }, 
+    { question: "How long does delivery take?", answer: "Typically, water tankers arrive within 2-4 hours of booking. During peak hours, it may take up to 6 hours. You'll receive updates via SMS and in-app notifications." }, 
+    { question: "Can I cancel my booking?", answer: "Yes, you can cancel your booking up to 1 hour before the scheduled delivery time. Go to History page, select your booking, and click Cancel." }, 
+    { question: "What are the tanker sizes available?", answer: "We offer three sizes: Small (1000L), Medium (3000L), and Large (5000L). Choose based on your water requirements." }, 
+    { question: "How do I track my order?", answer: "After booking confirmation, you'll receive a tracking link via SMS. You can also check the status in the History section of the app." }, 
+    { question: "What if the water quality is poor?", answer: "All our water is tested and certified. If you face any quality issues, contact our support immediately at support@pmctanker.com or call our helpline." }, 
+    { question: "Are there any additional charges?", answer: "The price displayed during booking is final. There are no hidden charges. However, cancellation after the tanker has been dispatched may incur a small fee." } 
+  ];
 
+  const contactInfo = [ 
+    { icon: "📞", title: "Customer Support", detail: "+91 7028698932", subtext: "Available 24/7" }, 
+    { icon: "📧", title: "Email Support", detail: "adityapisal1508.com", subtext: "Response within 24 hours" }, 
+    { icon: "💬", title: "WhatsApp", detail: "+91 7028698932", subtext: "Quick assistance" }, 
+    { icon: "📍", title: "Office Address", detail: "PMC Office, Pune - 411001", subtext: "Mon-Sat: 9 AM - 6 PM" } 
+  ];
+ 
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +47,7 @@ const Help = () => {
     }
 
     try {
-      const res = await fetch("https://pmc-backend-and-database-deploy-production.up.railway.app/api/help/feedback", {
+      const res = await fetch(`${API_URL}/api/help/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
@@ -126,7 +144,6 @@ const Help = () => {
           <h2>Send Us Your Feedback</h2>
           <form className="feedback-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              {/* <label htmlFor="name">Name</label> */}
               <input
                 type="text"
                 id="name"
@@ -136,7 +153,6 @@ const Help = () => {
               />
             </div>
             <div className="form-group">
-              {/* <label htmlFor="email">Email</label> */}
               <input
                 type="email"
                 id="email"
@@ -146,7 +162,6 @@ const Help = () => {
               />
             </div>
             <div className="form-group">
-              {/* <label htmlFor="message">Message</label> */}
               <textarea
                 id="message"
                 rows="5"
