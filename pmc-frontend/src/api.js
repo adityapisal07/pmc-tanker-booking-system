@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
+  baseURL: process.env.REACT_APP_API_URL || "https://pmc-backend-and-database-deploy-production.up.railway.app",
 });
 
 export const signupUser = async (userData) => {

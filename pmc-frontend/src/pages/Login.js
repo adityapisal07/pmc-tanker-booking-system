@@ -12,7 +12,7 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://pmc-tanker-booking-system-3.onrender.com/api/auth/login", {
+      const response = await fetch("https://pmc-backend-and-database-deploy-production.up.railway.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "https://pmcapp989.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://pmcapp989-zeta.vercel.app"})
 public class AuthController {
 
     @Autowired
