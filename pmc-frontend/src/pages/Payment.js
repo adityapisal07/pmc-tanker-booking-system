@@ -11,7 +11,7 @@ const Payment = () => {
     e.preventDefault();
 
     // ✅ Step 1: Create order on backend
-    const response = await fetch("http://localhost:8080/api/payment/create-order", {
+    const response = await fetch("https://pmc-backend-and-database-deploy-production.up.railway.app/api/payment/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: amount }),
