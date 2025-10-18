@@ -24,6 +24,9 @@ const Booking = () => {
   };
   const tankerSizes = ["1000L - Small", "3000L - Medium", "5000L - Large"];
 
+  // Get API URL from environment variable
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   useEffect(() => {
     if (area) setAvailableTankers(tankersByArea[area]);
     else setAvailableTankers([]);
@@ -31,39 +34,38 @@ const Booking = () => {
   }, [area]);
 
   const handleBooking = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!name || !phone || !area || !address || !tankerType || !tankerSize) {
-    setMessage("Please fill all fields!");
-    return;
-  }
-
-  try {
-    const response = await fetch("https://pmc-backend-and-database-deploy-production.up.railway.app/api/bookings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        phone,
-        area,
-        address,
-        tankerType,
-        tankerSize,
-      }),
-    });
-
-    if (response.ok) {
-      setMessage(`Booking confirmed for ${tankerType} (${tankerSize}) in ${area}.`);
-      setTimeout(() => navigate("/payment"), 1500);
-    } else {
-      setMessage("Failed to confirm booking. Please try again.");
+    if (!name || !phone || !area || !address || !tankerType || !tankerSize) {
+      setMessage("Please fill all fields!");
+      return;
     }
-  } catch (error) {
-    console.error("Error:", error);
-    setMessage("Server error. Please try again later.");
-  }
-};
 
+    try {
+      const response = await fetch(`${API_URL}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          area,
+          address,
+          tankerType,
+          tankerSize,
+        }),
+      });
+
+      if (response.ok) {
+        setMessage(`Booking confirmed for ${tankerType} (${tankerSize}) in ${area}.`);
+        setTimeout(() => navigate("/payment"), 1500);
+      } else {
+        setMessage("Failed to confirm booking. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("Server error. Please try again later.");
+    }
+  };
 
   return (
     <div className="booking-page">
@@ -71,7 +73,6 @@ const Booking = () => {
         <h2>Book Your Water Tanker</h2>
         <form onSubmit={handleBooking} className="booking-form">
           <div className="input-group">
-            {/* <label htmlFor="name">Full Name</label> */}
             <input 
               id="name" 
               type="text" 
@@ -82,7 +83,6 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            {/* <label htmlFor="phone">Phone Number</label> */}
             <input 
               id="phone" 
               type="tel" 
@@ -94,7 +94,6 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            {/* <label htmlFor="area">Area</label> */}
             <select id="area" value={area} onChange={(e) => setArea(e.target.value)}>
               <option value="">Select Area</option>
               {puneAreas.map((a) => (
@@ -104,7 +103,6 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            {/* <label htmlFor="address">Complete Address</label> */}
             <input 
               id="address" 
               type="text" 
@@ -115,7 +113,6 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            {/* <label htmlFor="tankerType">Tanker Type</label> */}
             <select 
               id="tankerType" 
               value={tankerType} 
@@ -130,7 +127,6 @@ const Booking = () => {
           </div>
 
           <div className="input-group">
-            {/* <label htmlFor="tankerSize">Tanker Size</label> */}
             <select id="tankerSize" value={tankerSize} onChange={(e) => setTankerSize(e.target.value)}>
               <option value="">Select Tanker Size</option>
               {tankerSizes.map((s) => (
